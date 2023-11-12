@@ -1,0 +1,6 @@
+flask
+gunicorn
+opencv-contrib-python-headless
+scikit-learn == 1.2.2
+scipy
+numpy
