@@ -39,7 +39,7 @@ def invert_colors(image):
     inverted_image = cv2.bitwise_not(image)
     return inverted_image
 
-def prep_image(image):
+def prep_image(image, save_path=None):
     img = resizing(image, 192)
     img = grayscaling(img)
     # Invert colors
@@ -48,9 +48,13 @@ def prep_image(image):
     img = equalizing(img)
 
     # Display the preprocessed image for debugging
-    cv2.imshow("Preprocessed Image", img)
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
+    # cv2.imshow("Preprocessed Image", img)
+    # cv2.waitKey(0)
+    # cv2.destroyAllWindows()
+
+    # Save the processed image
+    if save_path:
+        cv2.imwrite(save_path, img)
 
     return img
 # ============================================================================================
@@ -89,7 +93,11 @@ def predict_process(filepath):
     img = import_image(filepath)
     
     # Preprocessing Image
-    img = prep_image(img)
+    # img = prep_image(img)
+
+     # Preprocessing Image and Save
+    processed_image_path = "./static/processed/processed_image.png"  # Define the path where you want to save the image
+    img = prep_image(img, save_path=processed_image_path)
     
     # Feature Extraction
     img_feature = extract_feature(img)
